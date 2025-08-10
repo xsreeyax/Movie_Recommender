@@ -1,5 +1,4 @@
 import streamlit as st
-import pickle
 import pandas as pd
 import requests
 import joblib
@@ -22,9 +21,8 @@ def recommend(movie):
         recommended_movies_posters.append(fetch_posters(movie_id))
     return recommended_movies,recommended_movies_posters
 
-movies_dict=pickle.load(open('Movies_dict.pkl', 'rb'))
-movies= pd.DataFrame(movies_dict)
-
+movies_dict = joblib.load("Movies_dict.joblib")
+movies = pd.DataFrame(movies_dict)
 similarity = joblib.load("similarity.joblib")
 
 st.title("Movie Recommender System")
